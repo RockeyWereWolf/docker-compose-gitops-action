@@ -67,6 +67,8 @@ ssh-keyscan -p $INPUT_SSH_PORT "$SSH_HOST" >> /etc/ssh/ssh_known_hosts
 echo "Create docker context"
 docker context create remote --docker "host=ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_SSH_PORT"
 docker context use remote
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
 
 if [ -n "$INPUT_UPLOAD_DIRECTORY" ];
 then
@@ -96,12 +98,6 @@ then
   echo "Command: docker ${INPUT_ARGS} stack deploy --compose-file ${INPUT_COMPOSE_FILE_PATH}"
   docker ${INPUT_ARGS} stack deploy --compose-file ${INPUT_COMPOSE_FILE_PATH}
 else
-  ids=$(docker ps -a -q)
-  for id in $ids
-  do
-    echo "$id"
-    docker stop $id && docker rm $id
-  done
   echo "Command: docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull"
   docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull
 
