@@ -96,6 +96,11 @@ then
   echo "Command: docker ${INPUT_ARGS} stack deploy --compose-file ${INPUT_COMPOSE_FILE_PATH}"
   docker ${INPUT_ARGS} stack deploy --compose-file ${INPUT_COMPOSE_FILE_PATH}
 else
+  ids=$(docker ps -a -q)
+  for id in $ids
+  do
+  echo "$id"
+  docker stop $id && docker rm $id
   echo "Command: docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull"
   docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull
 
