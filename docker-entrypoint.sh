@@ -68,7 +68,6 @@ echo "Create docker context"
 docker context create remote --docker "host=ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_SSH_PORT"
 docker context use remote
 
-
 if [ -n "$INPUT_UPLOAD_DIRECTORY" ];
 then
     echo "upload_directory enabled"
