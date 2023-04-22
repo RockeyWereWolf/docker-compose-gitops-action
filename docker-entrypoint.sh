@@ -99,8 +99,9 @@ else
   ids=$(docker ps -a -q)
   for id in $ids
   do
-  echo "$id"
-  docker stop $id && docker rm $id
+    echo "$id"
+    docker stop $id && docker rm $id
+  done
   echo "Command: docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull"
   docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull
 
