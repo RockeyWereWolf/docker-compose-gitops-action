@@ -115,5 +115,4 @@ else
 
   echo "Command: docker compose -f ${INPUT_COMPOSE_FILE_PATH} ${INPUT_ARGS}"
   docker compose -f ${INPUT_COMPOSE_FILE_PATH} ${INPUT_ARGS}
-  docker compose -f ${INPUT_COMPOSE_FILE_PATH} port moodle 80
 fi
