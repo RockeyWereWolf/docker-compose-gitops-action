@@ -74,7 +74,7 @@ if [ $(docker ps -a -q) ]; then
   docker rm $(docker ps -a -q)
   echo "Stopped all running containers"
 else
-  echo "No running containers found"
+  echo "No running containers found."
 fi
 
 
