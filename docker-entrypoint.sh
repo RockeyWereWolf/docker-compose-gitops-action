@@ -112,8 +112,8 @@ then
   docker ${INPUT_ARGS} stack deploy --compose-file ${INPUT_COMPOSE_FILE_PATH}
 else
   echo "Command: docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull"
-  docker compose -f ${INPUT_COMPOSE_FILE_PATH} pull
+  docker-compose -f ${INPUT_COMPOSE_FILE_PATH} pull
 
   echo "Command: docker compose -f ${INPUT_COMPOSE_FILE_PATH} ${INPUT_ARGS}"
-  docker compose -f ${INPUT_COMPOSE_FILE_PATH} ${INPUT_ARGS}
+  docker-compose -f ${INPUT_COMPOSE_FILE_PATH} ${INPUT_ARGS}
 fi
