@@ -81,6 +81,7 @@ if [[ -n "$containers" ]]; then
 else
     echo "There are no running containers."
 fi
+docker compose -f ${INPUT_COMPOSE_FILE_PATH} port moodle 80
 
 
 if [ -n "$INPUT_UPLOAD_DIRECTORY" ];
