@@ -67,14 +67,19 @@ ssh-keyscan -p $INPUT_SSH_PORT "$SSH_HOST" >> /etc/ssh/ssh_known_hosts
 echo "Create docker context"
 docker context create remote --docker "host=ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_SSH_PORT"
 docker context use remote
-# Check for running containers
-if [ $(docker ps -a -q) ]; then
-  # Stop and remove all running containers
-  docker stop $(docker ps -a -q)
-  docker rm $(docker ps -a -q)
-  echo "Stopped all running containers"
+# Get a list of running containers
+containers=$(docker ps -q)
+# Check if there are running containers
+if [[ -n "$containers" ]]; then
+    # Stop all running containers
+    docker stop $containers
+
+    # Remove all stopped containers
+    docker rm $(docker ps -a -q)
+    
+    echo "All running containers stopped and removed."
 else
-  echo "No running containers found."
+    echo "There are no running containers."
 fi
 
 
