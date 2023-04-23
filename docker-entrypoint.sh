@@ -68,7 +68,7 @@ echo "Create docker context"
 docker context create remote --docker "host=ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_SSH_PORT"
 docker context use remote
 # Check for running containers
-if [[ $(docker ps -a -q) ]]; then
+if [ $(docker ps -a -q) ]; then
   # Stop and remove all running containers
   docker stop $(docker ps -a -q)
   docker rm $(docker ps -a -q)
